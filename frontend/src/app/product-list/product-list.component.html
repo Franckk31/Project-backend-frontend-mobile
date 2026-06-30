@@ -1,0 +1,77 @@
+<div class="container">
+  <h2>รายการสินค้า (จาก C# Web API)</h2>
+
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <table class="product-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ชื่อสินค้า</th>
+        <th>รายละเอียด</th>
+        <th>ราคา</th>
+        <th>คงเหลือ</th>
+        <th>จัดการ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of products">
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.description }}</td>
+        <td>{{ p.price | number:'1.2-2' }}</td>
+        <td>{{ p.stock }}</td>
+        <td>
+          <button (click)="deleteProduct(p.id)">ลบ</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>เพิ่มสินค้าใหม่</h3>
+  <form (ngSubmit)="addProduct()" class="add-form">
+    <input type="text" placeholder="ชื่อสินค้า" [(ngModel)]="newProduct.name" name="name" required />
+    <input type="text" placeholder="รายละเอียด" [(ngModel)]="newProduct.description" name="description" />
+    <input type="number" placeholder="ราคา" [(ngModel)]="newProduct.price" name="price" />
+    <input type="number" placeholder="จำนวนคงเหลือ" [(ngModel)]="newProduct.stock" name="stock" />
+    <button type="submit">เพิ่มสินค้า</button>
+  </form>
+
+  <hr style="margin: 40px 0; border: 1px solid #ccc;" />
+
+  <h2>รายการผู้ใช้งาน (Users)</h2>
+
+  <table class="product-table"> <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Username</th>
+        <th>ชื่อ-นามสกุล</th>
+        <th>บทบาท (Role)</th>
+        <th>ข้อมูลติดต่อ</th>
+        <th>จัดการ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of users">
+  <td>{{ u.userId }}</td>
+  <td>{{ u.username }}</td>
+  <td>{{ u.name }}</td>
+  <td>{{ u.role }}</td>
+  <td>{{ u.contactInfo }}</td>
+  <td>
+    <button (click)="deleteUser(u.userId)">ลบ</button>
+  </td>
+</tr>
+    </tbody>
+  </table>
+
+  <h3>เพิ่มผู้ใช้งานใหม่</h3>
+  <form (ngSubmit)="addUser()" class="add-form">
+    <input type="text" placeholder="Username" [(ngModel)]="newUser.username" name="username" required />
+    <input type="password" placeholder="Password" [(ngModel)]="newUser.password" name="password" required />
+    <input type="text" placeholder="ชื่อ-นามสกุล" [(ngModel)]="newUser.name" name="user_name" required />
+    <input type="text" placeholder="บทบาท (เช่น Admin, User)" [(ngModel)]="newUser.role" name="role" />
+    <input type="text" placeholder="ข้อมูลติดต่อ (เบอร์โทร/อีเมล)" [(ngModel)]="newUser.contactInfo" name="contactInfo" />
+    <button type="submit">เพิ่มผู้ใช้</button>
+  </form>
+</div>
